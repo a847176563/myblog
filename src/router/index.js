@@ -5,11 +5,12 @@ import Login from '../views/login.vue'
 import Regist from '../views/regist.vue'
 import Write from '../views/write.vue'
 import BlogDetail from '../views/blogDetail.vue'
+import Revise from '../views/revise.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/index',
+    path: '/',
     name: 'Index',
     component: Index
   },
@@ -29,6 +30,10 @@ const routes = [
     path: '/blog/detail/:blogId',
     name: 'BlogDetail',
     component: BlogDetail
+  },{
+    path: '/revise/detail/:blogId',
+    name: 'Revise',
+    component: Revise
   },
 
 ]

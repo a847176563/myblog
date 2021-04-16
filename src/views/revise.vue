@@ -30,7 +30,8 @@ export default {
     return {
       title: "",
       content: "",
-      loginUser: "",
+      blogId: "",
+      loginUser:'',
     };
   },
   created() {
@@ -38,6 +39,7 @@ export default {
   },
   methods: {
     getUser() {
+      console.log(666);
       if (this.$store.state.loginUser) {
         this.loginUser = this.$store.state.loginUser;
       } else {
@@ -47,9 +49,11 @@ export default {
           type: "warning",
         });
         this.$router.push("/login");
+        console.log();
       }
     },
     postBlog() {
+      this.blogId = this.$store.state.blogId;
       if (this.title == "") {
         this.$notify({
           title: "警告",
@@ -75,24 +79,24 @@ export default {
             return;
           }
           this.$http
-            .post("/blog/write", {
-              title: this.title,
+            .post("/blog/revise", {
+              title: this.title ,
               content: this.content,
-              userId: this.loginUser.user_id,
+              blogId: this.blogId,
             })
             .then((res) => {
               let { state } = res.data;
               if (state == "success") {
                 this.$notify({
                   title: "成功",
-                  message: "博客上传成功！",
+                  message: "博客修改成功！",
                   type: "success",
                 });
                 this.$router.push("/");
               } else {
                 this.$notify({
                   title: "警告",
-                  message: "发表文章失败!",
+                  message: "修改失败!",
                   type: "warning",
                 });
               }
